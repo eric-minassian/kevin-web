@@ -10,21 +10,26 @@ interface Props {
 const { variant = "primary", size = "md", href, class: className, type = "button" } = Astro.props;
 const Tag = href ? "a" : "button";
 
-const baseClasses = "inline-flex items-center justify-center font-medium transition-all duration-200 cursor-pointer";
+const baseClasses = "group inline-flex items-center justify-center font-medium transition-all duration-300 cursor-pointer relative overflow-hidden";
 
 const sizeClasses = {
-  sm: "px-4 py-2 text-sm rounded-lg gap-1.5",
-  md: "px-5 py-2.5 text-sm rounded-lg gap-2",
-  lg: "px-6 py-3 text-base rounded-lg gap-2",
+  sm: "px-4 py-2 text-sm rounded-xl gap-1.5",
+  md: "px-6 py-3 text-sm rounded-xl gap-2",
+  lg: "px-8 py-4 text-base rounded-xl gap-2",
 };
 
 const variantClasses = {
-  primary: "gradient-bg text-white hover:opacity-90",
-  outline: "bg-transparent text-white border border-white/20 hover:border-primary/50 hover:bg-primary/5",
-  ghost: "bg-white/5 text-white hover:bg-white/10",
+  primary: "gradient-bg text-white shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02]",
+  outline: "bg-transparent text-white border border-white/20 hover:border-primary/50 hover:bg-primary/5 backdrop-blur-sm",
+  ghost: "bg-white/5 text-white hover:bg-white/10 backdrop-blur-sm",
 };
 ---
 
 <Tag href={href} type={!href ? type : undefined} class:list={[baseClasses, sizeClasses[size], variantClasses[variant], className]}>
-  <slot />
+  <span class="relative z-10 flex items-center gap-2">
+    <slot />
+  </span>
+  {variant === "primary" && (
+    <span class="absolute inset-0 bg-gradient-to-r from-primary-light/20 to-accent-light/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+  )}
 </Tag>

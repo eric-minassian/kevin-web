@@ -5,24 +5,30 @@ import ArrowIcon from "../ui/icons/ArrowIcon.astro";
 import { services } from "../../data/services";
 ---
 
-<section id="services" class="py-20 relative">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="services" class="py-24 lg:py-32 relative overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-dark via-dark to-surface/20"></div>
+
+  <!-- Grid pattern -->
+  <div class="absolute inset-0 opacity-[0.015]" style="background-image: linear-gradient(rgba(255,255,255,.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.1) 1px, transparent 1px); background-size: 80px 80px;"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <SectionHeading
       label="What We Do"
       title="Our Services"
-      description="Comprehensive motion graphics and video editing solutions"
+      description="Comprehensive motion graphics and video editing solutions tailored to elevate your brand"
     />
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {services.map((service, index) => (
         <ServiceCard icon={service.icon} title={service.title} description={service.description} index={index} />
       ))}
     </div>
 
-    <div class="mt-12 text-center animate-on-scroll">
-      <a href="#contact" class="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all">
-        <span>Discuss your project</span>
-        <ArrowIcon size={18} />
+    <div class="mt-16 text-center animate-on-scroll">
+      <a href="#contact" class="group inline-flex items-center gap-3 text-lg text-primary font-medium hover:gap-4 transition-all duration-300">
+        <span class="underline-animation">Discuss your project</span>
+        <ArrowIcon size={20} class="transition-transform group-hover:translate-x-1" />
       </a>
     </div>
   </div>

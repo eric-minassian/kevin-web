@@ -14,25 +14,32 @@ const embedUrl = `https://drive.google.com/file/d/${driveId}/preview`;
 
 <div
   class:list={[
-    "video-player-wrapper group relative w-full rounded-xl overflow-hidden bg-dark-card border border-white/10 transition-all duration-300",
+    "video-player-wrapper group relative w-full rounded-2xl overflow-hidden bg-dark-card transition-all duration-500",
     className,
   ]}
   style={`aspect-ratio: ${aspectRatio}`}
 >
-  <!-- Loading state with shimmer -->
-  <div class="video-loading absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-dark-card to-dark z-[1] pointer-events-none transition-opacity duration-500">
+  <!-- Gradient border effect -->
+  <div class="absolute -inset-px bg-gradient-to-br from-primary/30 via-transparent to-accent/30 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
+
+  <!-- Loading state with premium animation -->
+  <div class="video-loading absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-dark-card via-dark to-dark-card z-[1] pointer-events-none transition-opacity duration-700">
     <div class="relative">
-      <div class="w-14 h-14 border-[3px] border-white/10 border-t-primary rounded-full animate-spin"></div>
+      <!-- Outer ring with gradient -->
+      <div class="w-16 h-16 rounded-full border-2 border-primary/20 animate-ping absolute inset-0"></div>
+      <div class="w-16 h-16 border-2 border-transparent border-t-primary border-r-accent rounded-full animate-spin"></div>
       <div class="absolute inset-0 flex items-center justify-center">
-        <PlayIcon size={20} class="text-primary" />
+        <div class="w-10 h-10 rounded-full gradient-bg flex items-center justify-center shadow-lg shadow-primary/30">
+          <PlayIcon size={18} class="text-white ml-0.5" />
+        </div>
       </div>
     </div>
-    <span class="text-sm text-gray-500 mt-4">Loading video...</span>
+    <span class="text-sm text-gray-500 mt-5 font-medium">Loading...</span>
   </div>
 
   <!-- Iframe -->
   <iframe
-    class="video-iframe absolute inset-0 w-full h-full border-none z-[2] opacity-0 transition-opacity duration-500"
+    class="video-iframe absolute inset-0 w-full h-full border-none z-[2] opacity-0 transition-opacity duration-700"
     src={embedUrl}
     title={title}
     allow="autoplay; encrypted-media; fullscreen"
@@ -41,8 +48,12 @@ const embedUrl = `https://drive.google.com/file/d/${driveId}/preview`;
     onload="this.classList.add('loaded'); this.closest('.video-player-wrapper').querySelector('.video-loading').style.opacity = '0';"
   ></iframe>
 
-  <!-- Hover overlay -->
-  <div class="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[3] pointer-events-none"></div>
+  <!-- Cinematic overlay on hover -->
+  <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[3] pointer-events-none"></div>
+
+  <!-- Corner accents -->
+  <div class="absolute top-0 left-0 w-16 h-16 border-l-2 border-t-2 border-primary/40 rounded-tl-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[3] pointer-events-none"></div>
+  <div class="absolute bottom-0 right-0 w-16 h-16 border-r-2 border-b-2 border-accent/40 rounded-br-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 z-[3] pointer-events-none"></div>
 </div>
 
 <style>

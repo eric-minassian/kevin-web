@@ -4,31 +4,40 @@ import VideoPlayer from "../ui/VideoPlayer.astro";
 import { works, categories } from "../../data/works";
 ---
 
-<section id="works" class="py-20 bg-surface/30">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="works" class="py-24 lg:py-32 relative overflow-hidden">
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-b from-dark via-surface/20 to-dark"></div>
+
+  <!-- Ambient glows -->
+  <div class="spotlight -top-40 -right-40 opacity-30"></div>
+  <div class="spotlight -bottom-40 -left-40 opacity-20" style="background: radial-gradient(circle, rgba(255, 154, 60, 0.1) 0%, transparent 70%);"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <SectionHeading
       label="Portfolio"
       title="Featured Projects"
-      description="A showcase of our best motion graphics and video editing work"
+      description="A curated selection of motion graphics and video editing work that speaks for itself"
     />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {works.map((work, index) => (
         <div class={`group animate-on-scroll stagger-${(index % 3) + 1}`}>
-          <div class="rounded-xl overflow-hidden bg-dark-card border border-white/[0.06] transition-all duration-300 hover:border-primary/30">
-            <VideoPlayer driveId={work.driveId} title={work.title} />
+          <div class="rounded-2xl overflow-hidden bg-dark-card/50 backdrop-blur-sm border border-white/[0.04] transition-all duration-500 hover:border-primary/30 hover:transform hover:-translate-y-2 hover:shadow-2xl hover:shadow-primary/10">
+            <div class="relative">
+              <VideoPlayer driveId={work.driveId} title={work.title} />
+            </div>
 
-            <div class="p-4">
-              <span class={`inline-block text-xs font-medium px-2 py-1 rounded mb-2 ${
+            <div class="p-6">
+              <span class={`inline-block text-xs font-semibold px-3 py-1.5 rounded-full mb-3 ${
                 categories[work.category].color === 'primary'
-                  ? 'bg-primary/10 text-primary'
-                  : 'bg-accent/10 text-accent'
+                  ? 'bg-primary/10 text-primary border border-primary/20'
+                  : 'bg-accent/10 text-accent border border-accent/20'
               }`}>
                 {categories[work.category].label}
               </span>
 
-              <h3 class="text-base font-semibold text-white mb-1">{work.title}</h3>
-              <p class="text-sm text-gray-500 line-clamp-2">{work.description}</p>
+              <h3 class="text-lg font-display font-semibold text-white mb-2 group-hover:gradient-text-static transition-all duration-300">{work.title}</h3>
+              <p class="text-sm text-gray-400 leading-relaxed line-clamp-2">{work.description}</p>
             </div>
           </div>
         </div>
