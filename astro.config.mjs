@@ -4,8 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://eric-minassian.github.io',
-  base: process.env.CI ? '/kevin-web' : '/',
+  site: 'https://motionglyph.com',
   vite: {
     plugins: [tailwindcss()],
   },
