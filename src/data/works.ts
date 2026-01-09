@@ -1,12 +1,20 @@
+export type CategoryId = "short-form" | "motion-graphics" | "long-form" | "ui-animation";
+export type ColorVariant = "primary" | "accent";
+
 export interface Work {
   id: string;
   title: string;
   description: string;
-  category: "short-form" | "motion-graphics" | "long-form" | "ui-animation";
+  category: CategoryId;
   driveId: string;
 }
 
-export const categories = {
+export interface Category {
+  label: string;
+  color: ColorVariant;
+}
+
+export const categories: Record<CategoryId, Category> = {
   "short-form": { label: "Short Form", color: "primary" },
   "motion-graphics": { label: "Motion Graphics", color: "accent" },
   "long-form": { label: "Long Form", color: "primary" },

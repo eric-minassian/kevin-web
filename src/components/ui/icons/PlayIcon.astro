@@ -1,0 +1,24 @@
+---
+interface Props {
+  class?: string;
+  size?: number;
+  stroke?: boolean;
+}
+
+const { class: className = "", size = 24, stroke = false } = Astro.props;
+---
+
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill={stroke ? "none" : "currentColor"}
+  stroke={stroke ? "currentColor" : "none"}
+  stroke-width={stroke ? "2.5" : undefined}
+  stroke-linecap={stroke ? "round" : undefined}
+  stroke-linejoin={stroke ? "round" : undefined}
+  class={className}
+>
+  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+</svg>

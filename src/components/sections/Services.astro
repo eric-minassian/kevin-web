@@ -1,6 +1,7 @@
 ---
 import SectionHeading from "../ui/SectionHeading.astro";
 import ServiceCard from "../ui/ServiceCard.astro";
+import ArrowIcon from "../ui/icons/ArrowIcon.astro";
 import { services } from "../../data/services";
 ---
 
@@ -40,10 +41,7 @@ import { services } from "../../data/services";
       </p>
       <a href="#contact" class="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300 group">
         <span>Discuss your project</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
+        <ArrowIcon size={18} class="group-hover:translate-x-1 transition-transform" />
       </a>
     </div>
   </div>

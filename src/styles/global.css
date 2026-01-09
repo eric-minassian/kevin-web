@@ -153,23 +153,6 @@
   }
 }
 
-@keyframes filmRoll {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes scanline {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100vh);
-  }
-}
 
 @layer base {
   html {
@@ -239,6 +222,21 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
+  /* Card base - standard card styling */
+  .card-base {
+    @apply rounded-2xl bg-dark-card/80 border border-white/[0.04] backdrop-blur-sm;
+  }
+
+  /* Hover lift effect */
+  .hover-lift {
+    @apply transition-all duration-300;
+  }
+
+  .hover-lift:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 20px 40px rgba(31, 182, 255, 0.15);
+  }
+
   /* Animated gradient border */
   .gradient-border {
     position: relative;
@@ -292,35 +290,6 @@
     animation: grain 0.5s steps(10) infinite;
   }
 
-  /* Scanline effect */
-  .scanline::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(
-      to right,
-      transparent,
-      rgba(31, 182, 255, 0.1),
-      transparent
-    );
-    opacity: 0.5;
-    z-index: 9998;
-    pointer-events: none;
-    animation: scanline 8s linear infinite;
-  }
-
-  /* Cinematic vignette */
-  .vignette::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.4) 100%);
-    pointer-events: none;
-    z-index: 1;
-  }
 
   /* Glowing line decoration */
   .glow-line {
@@ -344,19 +313,6 @@
     transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  /* Text reveal container */
-  .text-reveal {
-    overflow: hidden;
-  }
-
-  .text-reveal > * {
-    animation: textReveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    animation-play-state: paused;
-  }
-
-  .text-reveal.is-visible > * {
-    animation-play-state: running;
-  }
 
   /* Spotlight effect on hover */
   .spotlight {
@@ -425,23 +381,6 @@
       0 0 40px rgba(255, 154, 60, 0.3);
   }
 
-  /* Clip path reveals */
-  .clip-reveal {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-  }
-
-  .clip-hidden {
-    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0 100%);
-  }
-
-  /* Perspective for 3D effects */
-  .perspective {
-    perspective: 1000px;
-  }
-
-  .preserve-3d {
-    transform-style: preserve-3d;
-  }
 
   /* Backdrop blur levels */
   .backdrop-blur-3xl {

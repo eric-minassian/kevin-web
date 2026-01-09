@@ -1,4 +1,6 @@
 ---
+import PlayIcon from "./icons/PlayIcon.astro";
+
 interface Props {
   driveId: string;
   title?: string;
@@ -22,9 +24,7 @@ const embedUrl = `https://drive.google.com/file/d/${driveId}/preview`;
     <div class="relative">
       <div class="w-14 h-14 border-[3px] border-white/10 border-t-primary rounded-full animate-spin"></div>
       <div class="absolute inset-0 flex items-center justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
-          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
+        <PlayIcon size={20} class="text-primary" />
       </div>
     </div>
     <span class="text-sm text-gray-500 mt-4">Loading video...</span>

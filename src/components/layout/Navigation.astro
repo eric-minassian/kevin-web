@@ -1,5 +1,7 @@
 ---
 import { siteConfig } from "../../data/site-config";
+import ArrowIcon from "../ui/icons/ArrowIcon.astro";
+import PlayIcon from "../ui/icons/PlayIcon.astro";
 
 const { navLinks } = siteConfig;
 ---
@@ -16,9 +18,7 @@ const { navLinks } = siteConfig;
     <a href="#hero" class="group relative z-10 flex items-center gap-2">
       <!-- Logo icon -->
       <div class="w-10 h-10 rounded-xl gradient-bg-animated flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow duration-300">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white">
-          <polygon points="5 3 19 12 5 21 5 3"></polygon>
-        </svg>
+        <PlayIcon size={20} stroke class="text-white" />
       </div>
       <span class="text-xl font-bold tracking-tight">
         <span class="text-white">Motion</span><span class="gradient-text">Glyph</span>
@@ -50,10 +50,7 @@ const { navLinks } = siteConfig;
       class="hidden md:inline-flex items-center gap-2 gradient-bg-animated text-white px-6 py-2.5 rounded-full font-semibold text-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/40 overflow-hidden group"
     >
       <span class="relative z-10">Get Started</span>
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="relative z-10 group-hover:translate-x-0.5 transition-transform">
-        <line x1="5" y1="12" x2="19" y2="12"></line>
-        <polyline points="12 5 19 12 12 19"></polyline>
-      </svg>
+      <ArrowIcon size={16} class="relative z-10 group-hover:translate-x-0.5 transition-transform" />
       <!-- Shimmer -->
       <span class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></span>
     </a>
