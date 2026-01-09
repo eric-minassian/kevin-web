@@ -9,11 +9,14 @@ interface Props {
 const { value, suffix = "", label, index = 0 } = Astro.props;
 ---
 
-<div class={`text-center animate-on-scroll stagger-${(index % 4) + 1}`} data-counter data-target={value}>
+<div class={`group text-center animate-on-scroll stagger-${(index % 4) + 1}`} data-counter data-target={value}>
   <div class="relative inline-block">
-    <span class="block text-5xl md:text-6xl font-bold gradient-text leading-tight text-glow">
-      <span data-counter-value>0</span>{suffix}
+    <!-- Glow effect behind number -->
+    <div class="absolute inset-0 gradient-bg blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+    <!-- Number -->
+    <span class="relative block text-5xl md:text-6xl lg:text-7xl font-extrabold gradient-text leading-none tracking-tight">
+      <span data-counter-value>0</span><span class="text-primary-light">{suffix}</span>
     </span>
   </div>
-  <span class="block text-base md:text-lg text-gray-400 mt-2 font-medium">{label}</span>
+  <span class="block text-sm md:text-base text-gray-400 mt-4 font-medium tracking-wide">{label}</span>
 </div>

@@ -4,40 +4,79 @@ import VideoPlayer from "../ui/VideoPlayer.astro";
 import { works, categories } from "../../data/works";
 ---
 
-<section id="works" class="py-16 md:py-24 relative">
-  <!-- Background accent -->
-  <div class="absolute top-1/2 left-0 w-1/2 h-1/2 bg-[radial-gradient(circle,rgba(31,182,255,0.05)_0%,transparent_60%)] pointer-events-none"></div>
+<section id="works" class="py-24 md:py-32 relative overflow-hidden">
+  <!-- Background atmosphere -->
+  <div class="absolute inset-0">
+    <div class="absolute top-1/2 left-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(31,182,255,0.06)_0%,transparent_50%)] pointer-events-none -translate-y-1/2"></div>
+    <div class="absolute top-1/4 right-0 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(255,154,60,0.05)_0%,transparent_50%)] pointer-events-none"></div>
+  </div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <SectionHeading
-      label="Our Works"
+      label="Portfolio"
       title="Featured Projects"
       description="A showcase of our best motion graphics and video editing work"
     />
 
+    <!-- Works grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
       {works.map((work, index) => (
         <div class={`group animate-on-scroll stagger-${(index % 3) + 1}`}>
-          <div class="interactive-card overflow-hidden">
-            <VideoPlayer driveId={work.driveId} title={work.title} />
-            <div class="p-4">
-              <div class="flex items-center gap-2 mb-2">
-                <span class={`text-xs px-2 py-1 rounded-full ${
+          <div class="relative rounded-2xl overflow-hidden bg-dark-card border border-white/[0.04] transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
+            <!-- Video container -->
+            <div class="relative overflow-hidden">
+              <!-- Gradient overlay on hover -->
+              <div class="absolute inset-0 bg-gradient-to-t from-dark-card via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10 pointer-events-none"></div>
+              <VideoPlayer driveId={work.driveId} title={work.title} />
+            </div>
+
+            <!-- Content -->
+            <div class="p-5 relative">
+              <!-- Category badge -->
+              <div class="flex items-center gap-2 mb-3">
+                <span class={`text-xs font-medium px-3 py-1 rounded-full backdrop-blur-sm ${
                   categories[work.category].color === 'primary'
-                    ? 'bg-primary/10 text-primary'
-                    : 'bg-accent/10 text-accent'
+                    ? 'bg-primary/10 text-primary border border-primary/20'
+                    : 'bg-accent/10 text-accent border border-accent/20'
                 }`}>
                   {categories[work.category].label}
                 </span>
               </div>
-              <h3 class="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+
+              <!-- Title -->
+              <h3 class="text-lg font-bold text-white group-hover:gradient-text transition-all duration-300 mb-2">
                 {work.title}
               </h3>
-              <p class="text-sm text-gray-500 mt-1">{work.description}</p>
+
+              <!-- Description -->
+              <p class="text-sm text-gray-500 group-hover:text-gray-400 transition-colors line-clamp-2">{work.description}</p>
+
+              <!-- View project link -->
+              <div class="mt-4 flex items-center gap-2 text-xs font-medium text-primary opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                <span>View project</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                  <polyline points="12 5 19 12 12 19"></polyline>
+                </svg>
+              </div>
             </div>
+
+            <!-- Corner accent -->
+            <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[40px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
           </div>
         </div>
       ))}
+    </div>
+
+    <!-- View all link -->
+    <div class="mt-16 text-center animate-on-scroll">
+      <a href="#contact" class="inline-flex items-center gap-3 px-8 py-4 rounded-full border border-white/10 text-white font-medium hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 group">
+        <span>See more projects</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform text-primary">
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+          <polyline points="12 5 19 12 12 19"></polyline>
+        </svg>
+      </a>
     </div>
   </div>
 </section>

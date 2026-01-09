@@ -5,77 +5,88 @@ const currentYear = new Date().getFullYear();
 const { contact } = siteConfig;
 ---
 
-<footer class="relative pt-20 overflow-hidden">
+<footer class="relative pt-24 pb-8 overflow-hidden">
   <!-- Gradient top border -->
   <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent"></div>
 
-  <!-- Background gradient -->
-  <div class="absolute inset-0 bg-gradient-to-t from-dark-card to-transparent"></div>
+  <!-- Background -->
+  <div class="absolute inset-0 bg-gradient-to-t from-surface via-dark to-dark"></div>
+
+  <!-- Decorative elements -->
+  <div class="absolute top-0 left-1/4 w-[400px] h-[400px] bg-[radial-gradient(circle,rgba(31,182,255,0.04)_0%,transparent_50%)] pointer-events-none"></div>
+  <div class="absolute bottom-0 right-1/4 w-[300px] h-[300px] bg-[radial-gradient(circle,rgba(255,154,60,0.03)_0%,transparent_50%)] pointer-events-none"></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <!-- Main footer content -->
-    <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-12 pb-12">
+    <div class="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-12 lg:gap-16 pb-16">
+      <!-- Brand column -->
       <div>
-        <a href="#hero" class="inline-block text-2xl font-bold text-white mb-4">
-          Motion<span class="gradient-text">Glyph</span>
-        </a>
-        <p class="text-gray-400 max-w-xs leading-relaxed">{siteConfig.tagline}</p>
-
-        <!-- CTA in footer -->
-        <div class="mt-6 flex items-center gap-4">
-          <a
-            href="#contact"
-            class="inline-flex items-center gap-2 px-5 py-2.5 gradient-bg text-white text-sm font-semibold rounded-full hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30 transition-all"
-          >
-            Start a Project
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <line x1="5" y1="12" x2="19" y2="12"></line>
-              <polyline points="12 5 19 12 12 19"></polyline>
+        <a href="#hero" class="inline-flex items-center gap-2 mb-6 group">
+          <div class="w-10 h-10 rounded-xl gradient-bg-animated flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+              <polygon points="5 3 19 12 5 21 5 3"></polygon>
             </svg>
-          </a>
-        </div>
+          </div>
+          <span class="text-2xl font-bold">
+            <span class="text-white">Motion</span><span class="gradient-text">Glyph</span>
+          </span>
+        </a>
+        <p class="text-gray-400 max-w-xs leading-relaxed mb-8">{siteConfig.tagline}</p>
+
+        <!-- CTA -->
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 px-6 py-3 gradient-bg-animated text-white font-semibold rounded-full hover:-translate-y-1 hover:shadow-xl hover:shadow-primary/40 transition-all duration-300 group"
+        >
+          <span>Start a Project</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
       </div>
 
+      <!-- Quick links -->
       <div>
-        <h4 class="text-sm font-semibold text-white uppercase tracking-wide mb-6 flex items-center gap-2">
-          <span class="w-4 h-px bg-primary"></span>
+        <h4 class="text-sm font-semibold text-white uppercase tracking-widest mb-6 flex items-center gap-3">
+          <span class="w-6 h-px bg-gradient-to-r from-primary to-transparent"></span>
           Quick Links
         </h4>
-        <nav class="flex flex-col gap-3">
-          <a href="#works" class="text-gray-400 text-sm transition-colors hover:text-primary hover:translate-x-1 inline-flex items-center gap-1">
-            <span>Works</span>
-          </a>
-          <a href="#services" class="text-gray-400 text-sm transition-colors hover:text-primary hover:translate-x-1 inline-flex items-center gap-1">
-            <span>Services</span>
-          </a>
-          <a href="#testimonials" class="text-gray-400 text-sm transition-colors hover:text-primary hover:translate-x-1 inline-flex items-center gap-1">
-            <span>Testimonials</span>
-          </a>
-          <a href="#contact" class="text-gray-400 text-sm transition-colors hover:text-primary hover:translate-x-1 inline-flex items-center gap-1">
-            <span>Contact</span>
-          </a>
+        <nav class="flex flex-col gap-4">
+          {[
+            { href: "#works", label: "Works" },
+            { href: "#services", label: "Services" },
+            { href: "#testimonials", label: "Testimonials" },
+            { href: "#contact", label: "Contact" },
+          ].map((link) => (
+            <a href={link.href} class="group text-gray-400 text-sm transition-all hover:text-white inline-flex items-center gap-2">
+              <span class="w-0 h-px bg-primary group-hover:w-3 transition-all duration-300"></span>
+              <span>{link.label}</span>
+            </a>
+          ))}
         </nav>
       </div>
 
+      <!-- Connect -->
       <div>
-        <h4 class="text-sm font-semibold text-white uppercase tracking-wide mb-6 flex items-center gap-2">
-          <span class="w-4 h-px bg-primary"></span>
+        <h4 class="text-sm font-semibold text-white uppercase tracking-widest mb-6 flex items-center gap-3">
+          <span class="w-6 h-px bg-gradient-to-r from-primary to-transparent"></span>
           Connect
         </h4>
-        <div class="flex gap-3">
-          <a href={contact.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="group w-11 h-11 bg-dark/50 border border-white/10 rounded-xl flex items-center justify-center text-gray-400 transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:-translate-y-1">
+        <div class="flex gap-3 mb-6">
+          <a href={contact.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="group w-12 h-12 bg-dark-card border border-white/[0.06] rounded-xl flex items-center justify-center text-gray-500 transition-all duration-300 hover:border-[#E1306C]/40 hover:bg-[#E1306C]/10 hover:text-[#E1306C] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#E1306C]/20">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
               <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
             </svg>
           </a>
-          <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="group w-11 h-11 bg-dark/50 border border-white/10 rounded-xl flex items-center justify-center text-gray-400 transition-all hover:border-[#25D366]/50 hover:bg-[#25D366]/10 hover:text-[#25D366] hover:-translate-y-1">
+          <a href={contact.whatsappLink} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="group w-12 h-12 bg-dark-card border border-white/[0.06] rounded-xl flex items-center justify-center text-gray-500 transition-all duration-300 hover:border-[#25D366]/40 hover:bg-[#25D366]/10 hover:text-[#25D366] hover:-translate-y-1 hover:shadow-lg hover:shadow-[#25D366]/20">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
             </svg>
           </a>
-          <a href={`mailto:${contact.email}`} aria-label="Email" class="group w-11 h-11 bg-dark/50 border border-white/10 rounded-xl flex items-center justify-center text-gray-400 transition-all hover:border-primary/50 hover:bg-primary/10 hover:text-primary hover:-translate-y-1">
+          <a href={`mailto:${contact.email}`} aria-label="Email" class="group w-12 h-12 bg-dark-card border border-white/[0.06] rounded-xl flex items-center justify-center text-gray-500 transition-all duration-300 hover:border-primary/40 hover:bg-primary/10 hover:text-primary hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/20">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
               <polyline points="22,6 12,13 2,6"></polyline>
@@ -83,21 +94,22 @@ const { contact } = siteConfig;
           </a>
         </div>
 
-        <!-- Email display -->
-        <p class="mt-4 text-sm text-gray-500">{contact.email}</p>
+        <p class="text-sm text-gray-500 hover:text-gray-400 transition-colors">{contact.email}</p>
       </div>
     </div>
 
     <!-- Bottom bar -->
-    <div class="border-t border-white/10 py-6 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="border-t border-white/[0.06] pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-gray-500 text-sm">
         &copy; {currentYear} Motion Glyph. All rights reserved.
       </p>
-      <p class="text-gray-600 text-xs flex items-center gap-1">
+      <p class="text-gray-600 text-xs flex items-center gap-2">
         Crafted with
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-red-500">
-          <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-        </svg>
+        <span class="relative">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" class="text-red-500 animate-pulse">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </span>
         for creators worldwide
       </p>
     </div>

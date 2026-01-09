@@ -4,14 +4,19 @@ import VideoPlayer from "../ui/VideoPlayer.astro";
 import { testimonials } from "../../data/testimonials";
 ---
 
-<section id="testimonials" class="py-16 md:py-24 relative">
-  <!-- Background decoration -->
+<section id="testimonials" class="py-24 md:py-32 relative overflow-hidden">
+  <!-- Background atmosphere -->
   <div class="absolute inset-0 overflow-hidden">
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[radial-gradient(circle,rgba(31,182,255,0.03)_0%,transparent_50%)] pointer-events-none"></div>
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-[radial-gradient(circle,rgba(31,182,255,0.04)_0%,transparent_50%)] pointer-events-none"></div>
   </div>
 
-  <!-- Quote decoration -->
-  <div class="absolute top-24 left-8 text-primary/5 hidden lg:block">
+  <!-- Decorative quote marks -->
+  <div class="absolute top-32 left-8 text-primary/[0.03] hidden lg:block">
+    <svg xmlns="http://www.w3.org/2000/svg" width="180" height="180" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+    </svg>
+  </div>
+  <div class="absolute bottom-32 right-8 text-accent/[0.03] rotate-180 hidden lg:block">
     <svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="currentColor">
       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
     </svg>
@@ -20,25 +25,62 @@ import { testimonials } from "../../data/testimonials";
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
     <SectionHeading
       label="Testimonials"
-      title="What Our Clients Say"
+      title="What Clients Say"
       description="Hear from creators and businesses who transformed their content with us"
     />
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
       {testimonials.map((testimonial, index) => (
-        <div class={`group interactive-card overflow-hidden animate-on-scroll stagger-${index + 1}`}>
-          <VideoPlayer driveId={testimonial.driveId} title="Client Testimonial" />
-          <div class="p-4 flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold text-sm">
-              {String.fromCharCode(65 + index)}
+        <div class={`group animate-on-scroll stagger-${index + 1}`}>
+          <div class="relative rounded-2xl overflow-hidden bg-dark-card border border-white/[0.04] transition-all duration-500 hover:border-primary/30 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2">
+            <!-- Video -->
+            <div class="relative">
+              <VideoPlayer driveId={testimonial.driveId} title="Client Testimonial" />
+              <!-- Play indicator overlay -->
+              <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-primary/20 backdrop-blur-sm flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-white ml-1">
+                    <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                  </svg>
+                </div>
+              </div>
             </div>
-            <div>
-              <span class="block text-sm font-medium text-white">Happy Client</span>
-              <span class="block text-xs text-gray-500">Video Testimonial</span>
+
+            <!-- Client info -->
+            <div class="p-5 flex items-center gap-4">
+              <div class="w-12 h-12 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-white font-bold shadow-lg shadow-primary/20">
+                {String.fromCharCode(65 + index)}
+              </div>
+              <div>
+                <span class="block text-base font-semibold text-white">Happy Client</span>
+                <span class="block text-sm text-gray-500">Video Testimonial</span>
+              </div>
+              <!-- Quote icon -->
+              <div class="ml-auto opacity-30 group-hover:opacity-60 transition-opacity">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+                  <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                </svg>
+              </div>
             </div>
           </div>
         </div>
       ))}
+    </div>
+
+    <!-- Trust badge -->
+    <div class="mt-16 text-center animate-on-scroll">
+      <div class="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-dark-card/60 border border-white/[0.06] backdrop-blur-sm">
+        <div class="flex -space-x-2">
+          {[...Array(4)].map((_, i) => (
+            <div class="w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-[10px] font-bold ring-2 ring-dark text-white">
+              {String.fromCharCode(75 + i)}
+            </div>
+          ))}
+        </div>
+        <span class="text-sm text-gray-400">
+          Join <span class="text-white font-semibold">100+</span> satisfied clients
+        </span>
+      </div>
     </div>
   </div>
 </section>
