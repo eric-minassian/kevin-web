@@ -23,6 +23,17 @@ import Contact from "../components/sections/Contact.astro";
   </main>
 
   <Footer />
+
+  <!-- Back to Top Button -->
+  <button
+    id="back-to-top"
+    aria-label="Back to top"
+    class="fixed bottom-8 right-8 w-12 h-12 rounded-full gradient-bg text-white flex items-center justify-center opacity-0 invisible translate-y-4 transition-all duration-300 z-50 shadow-lg shadow-primary/30 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-1"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polyline points="18 15 12 9 6 15"></polyline>
+    </svg>
+  </button>
 </Layout>
 
 <script>
@@ -94,15 +105,40 @@ import Contact from "../components/sections/Contact.astro";
     counters.forEach((counter) => observer.observe(counter));
   };
 
+  // Back to top button
+  const initBackToTop = () => {
+    const backToTop = document.getElementById("back-to-top");
+    if (!backToTop) return;
+
+    const toggleVisibility = () => {
+      if (window.scrollY > 500) {
+        backToTop.classList.remove("opacity-0", "invisible", "translate-y-4");
+        backToTop.classList.add("opacity-100", "visible", "translate-y-0");
+      } else {
+        backToTop.classList.add("opacity-0", "invisible", "translate-y-4");
+        backToTop.classList.remove("opacity-100", "visible", "translate-y-0");
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility, { passive: true });
+    toggleVisibility();
+
+    backToTop.addEventListener("click", () => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  };
+
   // Initialize on DOM ready
   document.addEventListener("DOMContentLoaded", () => {
     initScrollAnimations();
     initCounterAnimations();
+    initBackToTop();
   });
 
   // Also run immediately in case DOMContentLoaded already fired
   if (document.readyState !== "loading") {
     initScrollAnimations();
     initCounterAnimations();
+    initBackToTop();
   }
 </script>

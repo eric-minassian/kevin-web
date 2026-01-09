@@ -6,7 +6,8 @@
   --color-primary-light: #A6E6FF;
   --color-accent: #FF9A3C;
   --color-dark: #0B0F14;
-  --color-dark-card: #2A2F36;
+  --color-dark-card: #1A1F26;
+  --color-dark-card-hover: #252B33;
 
   /* Font Family */
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
@@ -16,6 +17,11 @@
   --animate-glow-pulse: glowPulse 2s ease-in-out infinite;
   --animate-scroll-pulse: scrollPulse 2s ease-in-out infinite;
   --animate-spin-slow: spin 1s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-float-delayed: float 6s ease-in-out 2s infinite;
+  --animate-shimmer: shimmer 2s linear infinite;
+  --animate-gradient-shift: gradientShift 8s ease infinite;
+  --animate-pulse-ring: pulseRing 2s ease-out infinite;
 }
 
 @keyframes fadeInUp {
@@ -49,6 +55,57 @@
   }
 }
 
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-20px) rotate(2deg);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.8);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -10%); }
+  20% { transform: translate(-15%, 5%); }
+  30% { transform: translate(7%, -25%); }
+  40% { transform: translate(-5%, 25%); }
+  50% { transform: translate(-15%, 10%); }
+  60% { transform: translate(15%, 0%); }
+  70% { transform: translate(0%, 15%); }
+  80% { transform: translate(3%, 35%); }
+  90% { transform: translate(-10%, 10%); }
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
@@ -57,6 +114,11 @@
 
   body {
     @apply font-sans text-white bg-dark antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    @apply bg-primary/30 text-white;
   }
 }
 
@@ -76,6 +138,59 @@
   .glow-accent {
     box-shadow: 0 0 40px rgba(255, 154, 60, 0.3);
   }
+
+  /* Glassmorphism card */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl;
+  }
+
+  /* Animated gradient border */
+  .gradient-border {
+    position: relative;
+    background: linear-gradient(var(--color-dark-card), var(--color-dark-card)) padding-box,
+                linear-gradient(135deg, var(--color-primary), var(--color-accent), var(--color-primary)) border-box;
+    border: 1px solid transparent;
+    background-size: 100% 100%, 200% 200%;
+    animation: gradientShift 4s ease infinite;
+  }
+
+  /* Shimmer effect for loading states */
+  .shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  /* Interactive card with glow on hover */
+  .interactive-card {
+    @apply bg-dark-card border border-white/10 rounded-xl transition-all duration-300;
+  }
+
+  .interactive-card:hover {
+    @apply border-primary/50 bg-dark-card-hover;
+    box-shadow: 0 0 30px rgba(31, 182, 255, 0.15),
+                0 0 60px rgba(31, 182, 255, 0.1);
+    transform: translateY(-4px);
+  }
+
+  /* Noise texture overlay */
+  .noise-overlay::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.03;
+    z-index: 100;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
 }
 
 @layer utilities {
@@ -85,5 +200,16 @@
 
   .animate-on-scroll.is-visible {
     @apply opacity-100 translate-y-0;
+  }
+
+  .stagger-1 { transition-delay: 100ms; }
+  .stagger-2 { transition-delay: 200ms; }
+  .stagger-3 { transition-delay: 300ms; }
+  .stagger-4 { transition-delay: 400ms; }
+  .stagger-5 { transition-delay: 500ms; }
+
+  /* Text shadow for better readability */
+  .text-glow {
+    text-shadow: 0 0 30px rgba(31, 182, 255, 0.5);
   }
 }

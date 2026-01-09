@@ -12,20 +12,41 @@ const embedUrl = `https://drive.google.com/file/d/${driveId}/preview`;
 
 <div
   class:list={[
-    "relative w-full rounded-xl overflow-hidden bg-dark-card border border-white/10 transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/30",
+    "video-player-wrapper group relative w-full rounded-xl overflow-hidden bg-dark-card border border-white/10 transition-all duration-300",
     className,
   ]}
   style={`aspect-ratio: ${aspectRatio}`}
 >
-  <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-dark-card to-dark z-[1] pointer-events-none">
-    <div class="w-12 h-12 border-[3px] border-white/10 border-t-primary rounded-full animate-spin"></div>
+  <!-- Loading state with shimmer -->
+  <div class="video-loading absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-dark-card to-dark z-[1] pointer-events-none transition-opacity duration-500">
+    <div class="relative">
+      <div class="w-14 h-14 border-[3px] border-white/10 border-t-primary rounded-full animate-spin"></div>
+      <div class="absolute inset-0 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="text-primary">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </div>
+    </div>
+    <span class="text-sm text-gray-500 mt-4">Loading video...</span>
   </div>
+
+  <!-- Iframe -->
   <iframe
-    class="absolute inset-0 w-full h-full border-none z-[2]"
+    class="video-iframe absolute inset-0 w-full h-full border-none z-[2] opacity-0 transition-opacity duration-500"
     src={embedUrl}
     title={title}
     allow="autoplay; encrypted-media; fullscreen"
     allowfullscreen
     loading="lazy"
+    onload="this.classList.add('loaded'); this.closest('.video-player-wrapper').querySelector('.video-loading').style.opacity = '0';"
   ></iframe>
+
+  <!-- Hover overlay -->
+  <div class="absolute inset-0 bg-gradient-to-t from-dark/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-[3] pointer-events-none"></div>
 </div>
+
+<style>
+  .video-iframe.loaded {
+    opacity: 1;
+  }
+</style>

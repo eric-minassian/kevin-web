@@ -4,13 +4,20 @@ import ServiceCard from "../ui/ServiceCard.astro";
 import { services } from "../../data/services";
 ---
 
-<section id="services" class="py-16 md:py-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <SectionHeading label="What We Do" title="Our Services" />
+<section id="services" class="py-16 md:py-24 relative">
+  <!-- Background accent -->
+  <div class="absolute top-0 right-0 w-1/2 h-1/2 bg-[radial-gradient(circle,rgba(255,154,60,0.05)_0%,transparent_60%)] pointer-events-none"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+    <SectionHeading
+      label="What We Do"
+      title="Our Services"
+      description="Comprehensive motion graphics and video editing solutions for your brand"
+    />
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-      {services.map((service) => (
-        <ServiceCard icon={service.icon} title={service.title} description={service.description} />
+      {services.map((service, index) => (
+        <ServiceCard icon={service.icon} title={service.title} description={service.description} index={index} />
       ))}
     </div>
   </div>

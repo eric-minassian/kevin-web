@@ -3,14 +3,17 @@ interface Props {
   value: number;
   suffix?: string;
   label: string;
+  index?: number;
 }
 
-const { value, suffix = "", label } = Astro.props;
+const { value, suffix = "", label, index = 0 } = Astro.props;
 ---
 
-<div class="text-center animate-on-scroll" data-counter data-target={value}>
-  <span class="block text-5xl md:text-6xl font-bold gradient-text leading-tight">
-    <span data-counter-value>0</span>{suffix}
-  </span>
-  <span class="block text-lg text-gray-400 mt-2">{label}</span>
+<div class={`text-center animate-on-scroll stagger-${(index % 4) + 1}`} data-counter data-target={value}>
+  <div class="relative inline-block">
+    <span class="block text-5xl md:text-6xl font-bold gradient-text leading-tight text-glow">
+      <span data-counter-value>0</span>{suffix}
+    </span>
+  </div>
+  <span class="block text-base md:text-lg text-gray-400 mt-2 font-medium">{label}</span>
 </div>
