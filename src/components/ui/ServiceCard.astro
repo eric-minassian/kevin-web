@@ -7,53 +7,19 @@ interface Props {
 }
 
 const { icon, title, description, index = 0 } = Astro.props;
-
-// Alternate gradient directions for visual variety
-const gradientDirections = [
-  "from-primary/20 to-transparent",
-  "from-accent/15 to-transparent",
-  "from-primary-light/15 to-transparent",
-];
 ---
 
-<article class={`group relative spotlight animate-on-scroll stagger-${(index % 3) + 1}`}>
-  <!-- Card with glass effect -->
-  <div class="relative h-full p-8 md:p-10 rounded-3xl bg-dark-card/80 border border-white/[0.04] backdrop-blur-sm transition-all duration-500 hover:border-primary/30 hover:bg-dark-card overflow-hidden">
-    <!-- Gradient overlay on hover -->
-    <div class={`absolute inset-0 bg-gradient-to-br ${gradientDirections[index % 3]} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`}></div>
-
-    <!-- Decorative corner accent -->
-    <div class="absolute top-0 right-0 w-20 h-20 bg-gradient-to-bl from-primary/10 to-transparent rounded-bl-[60px] opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-    <!-- Content -->
-    <div class="relative z-10">
-      <!-- Icon container -->
-      <div class="relative w-16 h-16 mb-8">
-        <!-- Icon glow -->
-        <div class="absolute inset-0 gradient-bg rounded-2xl blur-xl opacity-30 group-hover:opacity-60 transition-opacity duration-500"></div>
-        <!-- Icon background -->
-        <div class="relative w-full h-full gradient-bg-animated rounded-2xl flex items-center justify-center shadow-lg shadow-primary/20 group-hover:shadow-primary/40 transition-shadow duration-500 group-hover:scale-110 transform">
-          <Fragment set:html={icon} />
-        </div>
-      </div>
-
-      <!-- Title -->
-      <h3 class="text-2xl font-bold mb-4 text-white group-hover:gradient-text transition-all duration-300">{title}</h3>
-
-      <!-- Description -->
-      <p class="text-base text-gray-400 leading-relaxed group-hover:text-gray-300 transition-colors duration-300">{description}</p>
-
-      <!-- Learn more link -->
-      <div class="mt-8 flex items-center gap-2 text-sm font-medium text-primary opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-        <span>Learn more</span>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-300">
-          <line x1="5" y1="12" x2="19" y2="12"></line>
-          <polyline points="12 5 19 12 12 19"></polyline>
-        </svg>
-      </div>
+<article class={`group animate-on-scroll stagger-${(index % 3) + 1}`}>
+  <div class="h-full p-6 rounded-xl bg-dark-card border border-white/[0.06] transition-all duration-300 hover:border-primary/30 hover:bg-dark-card-hover">
+    <!-- Icon -->
+    <div class="w-12 h-12 mb-5 rounded-lg gradient-bg flex items-center justify-center text-white">
+      <Fragment set:html={icon} />
     </div>
 
-    <!-- Bottom accent line -->
-    <div class="absolute bottom-0 left-8 right-8 h-px bg-gradient-to-r from-transparent via-primary/50 to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+    <!-- Title -->
+    <h3 class="text-lg font-semibold mb-3 text-white">{title}</h3>
+
+    <!-- Description -->
+    <p class="text-sm text-gray-400 leading-relaxed">{description}</p>
   </div>
 </article>

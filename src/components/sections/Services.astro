@@ -5,47 +5,25 @@ import ArrowIcon from "../ui/icons/ArrowIcon.astro";
 import { services } from "../../data/services";
 ---
 
-<section id="services" class="py-24 md:py-32 relative overflow-hidden">
-  <!-- Cinematic background -->
-  <div class="absolute inset-0">
-    <!-- Gradient orbs -->
-    <div class="absolute top-0 right-0 w-[600px] h-[600px] bg-[radial-gradient(circle,rgba(255,154,60,0.08)_0%,transparent_50%)] pointer-events-none"></div>
-    <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[radial-gradient(circle,rgba(31,182,255,0.06)_0%,transparent_50%)] pointer-events-none"></div>
-
-    <!-- Grid pattern -->
-    <div class="absolute inset-0 bg-[linear-gradient(rgba(31,182,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(31,182,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_70%)]"></div>
-  </div>
-
-  <!-- Section divider top -->
-  <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent"></div>
-
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+<section id="services" class="py-20 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <SectionHeading
       label="What We Do"
       title="Our Services"
-      description="Comprehensive motion graphics and video editing solutions tailored to elevate your brand"
+      description="Comprehensive motion graphics and video editing solutions"
     />
 
-    <!-- Services grid with featured layout -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {services.map((service, index) => (
         <ServiceCard icon={service.icon} title={service.title} description={service.description} index={index} />
       ))}
     </div>
 
-    <!-- Bottom CTA -->
-    <div class="mt-16 text-center animate-on-scroll">
-      <p class="text-gray-400 mb-6">
-        Need something specific?
-        <span class="text-white font-medium">We've got you covered.</span>
-      </p>
-      <a href="#contact" class="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all duration-300 group">
+    <div class="mt-12 text-center animate-on-scroll">
+      <a href="#contact" class="inline-flex items-center gap-2 text-primary font-medium hover:gap-3 transition-all">
         <span>Discuss your project</span>
-        <ArrowIcon size={18} class="group-hover:translate-x-1 transition-transform" />
+        <ArrowIcon size={18} />
       </a>
     </div>
   </div>
-
-  <!-- Section divider bottom -->
-  <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/[0.06] to-transparent"></div>
 </section>
