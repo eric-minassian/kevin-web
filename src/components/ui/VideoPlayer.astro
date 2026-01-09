@@ -1,0 +1,31 @@
+---
+interface Props {
+  driveId: string;
+  title?: string;
+  aspectRatio?: string;
+  class?: string;
+}
+
+const { driveId, title = "Video", aspectRatio = "16/9", class: className } = Astro.props;
+const embedUrl = `https://drive.google.com/file/d/${driveId}/preview`;
+---
+
+<div
+  class:list={[
+    "relative w-full rounded-xl overflow-hidden bg-dark-card border border-white/10 transition-all hover:border-primary hover:shadow-lg hover:shadow-primary/30",
+    className,
+  ]}
+  style={`aspect-ratio: ${aspectRatio}`}
+>
+  <div class="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-dark-card to-dark z-[1] pointer-events-none">
+    <div class="w-12 h-12 border-[3px] border-white/10 border-t-primary rounded-full animate-spin"></div>
+  </div>
+  <iframe
+    class="absolute inset-0 w-full h-full border-none z-[2]"
+    src={embedUrl}
+    title={title}
+    allow="autoplay; encrypted-media; fullscreen"
+    allowfullscreen
+    loading="lazy"
+  ></iframe>
+</div>

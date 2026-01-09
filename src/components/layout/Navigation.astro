@@ -1,0 +1,120 @@
+---
+import { siteConfig } from "../../data/site-config";
+
+const { navLinks } = siteConfig;
+---
+
+<nav
+  id="nav"
+  class="fixed top-0 left-0 right-0 h-20 z-50 transition-all duration-300 bg-dark/50 backdrop-blur-md border-b border-transparent"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full relative z-10">
+    <a href="#hero" class="text-xl font-bold z-10">
+      <span class="text-white">Motion<span class="gradient-text">Glyph</span></span>
+    </a>
+
+    <ul id="nav-links" class="hidden md:flex gap-8">
+      {navLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            class="text-sm font-medium text-gray-400 hover:text-primary transition-colors relative after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-0.5 after:bg-gradient-to-r after:from-primary after:to-accent hover:after:w-full after:transition-all"
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <a
+      href="#contact"
+      class="hidden md:inline-flex gradient-bg text-white px-6 py-2.5 rounded-full font-semibold text-sm transition-all hover:-translate-y-0.5 hover:shadow-lg hover:shadow-primary/30"
+    >
+      Get Started
+    </a>
+
+    <button
+      id="nav-toggle"
+      class="md:hidden flex flex-col justify-center gap-1.5 w-8 h-8 z-10"
+      aria-label="Toggle menu"
+      aria-expanded="false"
+    >
+      <span class="block w-6 h-0.5 bg-white transition-transform origin-center"></span>
+      <span class="block w-6 h-0.5 bg-white transition-opacity"></span>
+      <span class="block w-6 h-0.5 bg-white transition-transform origin-center"></span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-dark flex flex-col items-center justify-center gap-8 transform translate-x-full transition-transform duration-300 md:hidden z-40"
+  >
+    {navLinks.map((link) => (
+      <a
+        href={link.href}
+        class="text-2xl font-medium text-gray-400 hover:text-primary transition-colors mobile-link"
+      >
+        {link.label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<script>
+  const nav = document.getElementById("nav");
+  const navToggle = document.getElementById("nav-toggle");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const toggleSpans = navToggle?.querySelectorAll("span");
+
+  // Scroll effect
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      nav?.classList.add("bg-dark/85", "backdrop-blur-xl", "border-white/10");
+      nav?.classList.remove("bg-dark/50", "backdrop-blur-md", "border-transparent");
+    } else {
+      nav?.classList.remove("bg-dark/85", "backdrop-blur-xl", "border-white/10");
+      nav?.classList.add("bg-dark/50", "backdrop-blur-md", "border-transparent");
+    }
+  };
+
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  handleScroll();
+
+  // Mobile menu toggle
+  navToggle?.addEventListener("click", () => {
+    const isOpen = mobileMenu?.classList.toggle("translate-x-full");
+    mobileMenu?.classList.toggle("translate-x-0");
+
+    if (toggleSpans) {
+      if (!mobileMenu?.classList.contains("translate-x-full")) {
+        toggleSpans[0].classList.add("rotate-45", "translate-y-2");
+        toggleSpans[1].classList.add("opacity-0");
+        toggleSpans[2].classList.add("-rotate-45", "-translate-y-2");
+        document.body.style.overflow = "hidden";
+      } else {
+        toggleSpans[0].classList.remove("rotate-45", "translate-y-2");
+        toggleSpans[1].classList.remove("opacity-0");
+        toggleSpans[2].classList.remove("-rotate-45", "-translate-y-2");
+        document.body.style.overflow = "";
+      }
+    }
+
+    navToggle.setAttribute("aria-expanded", String(!mobileMenu?.classList.contains("translate-x-full")));
+  });
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu.classList.add("translate-x-full");
+      mobileMenu.classList.remove("translate-x-0");
+      if (toggleSpans) {
+        toggleSpans[0].classList.remove("rotate-45", "translate-y-2");
+        toggleSpans[1].classList.remove("opacity-0");
+        toggleSpans[2].classList.remove("-rotate-45", "-translate-y-2");
+      }
+      document.body.style.overflow = "";
+      navToggle?.setAttribute("aria-expanded", "false");
+    });
+  });
+</script>

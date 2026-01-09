@@ -1,0 +1,17 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import ServiceCard from "../ui/ServiceCard.astro";
+import { services } from "../../data/services";
+---
+
+<section id="services" class="py-16 md:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading label="What We Do" title="Our Services" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {services.map((service) => (
+        <ServiceCard icon={service.icon} title={service.title} description={service.description} />
+      ))}
+    </div>
+  </div>
+</section>

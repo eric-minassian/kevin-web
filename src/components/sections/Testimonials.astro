@@ -1,0 +1,19 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import VideoPlayer from "../ui/VideoPlayer.astro";
+import { testimonials } from "../../data/testimonials";
+---
+
+<section id="testimonials" class="py-16 md:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading label="Testimonials" title="What Our Clients Say" />
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+      {testimonials.map((testimonial) => (
+        <div class="transition-transform hover:scale-[1.02] animate-on-scroll">
+          <VideoPlayer driveId={testimonial.driveId} title="Client Testimonial" />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

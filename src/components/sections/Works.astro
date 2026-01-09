@@ -1,0 +1,19 @@
+---
+import SectionHeading from "../ui/SectionHeading.astro";
+import VideoPlayer from "../ui/VideoPlayer.astro";
+import { works } from "../../data/works";
+---
+
+<section id="works" class="py-16 md:py-24">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <SectionHeading label="Our Works" title="Featured Projects" />
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+      {works.map((work) => (
+        <div class="transition-transform hover:scale-[1.02] animate-on-scroll">
+          <VideoPlayer driveId={work.driveId} title={work.title} />
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

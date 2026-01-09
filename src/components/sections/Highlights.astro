@@ -1,0 +1,25 @@
+---
+import StatCounter from "../ui/StatCounter.astro";
+import { siteConfig } from "../../data/site-config";
+---
+
+<section class="py-16 bg-gradient-to-b from-transparent via-primary/[0.03] to-transparent border-y border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-12">
+    <div class="grid grid-cols-2 gap-8 md:gap-16 justify-items-center">
+      {siteConfig.highlights.map((stat) => (
+        <StatCounter value={stat.value} suffix={stat.suffix} label={stat.label} />
+      ))}
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-4 animate-on-scroll">
+      {siteConfig.features.map((feature) => (
+        <div class="flex items-center gap-3 bg-dark-card px-5 py-3 rounded-full border border-white/10 text-sm text-gray-400">
+          <svg class="w-5 h-5 text-primary flex-shrink-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+          <span>{feature}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
