@@ -1,9 +1,8 @@
 ---
 import { siteConfig } from "../../data/site-config";
-import PlayIcon from "../ui/icons/PlayIcon.astro";
-
 const currentYear = new Date().getFullYear();
 const { contact } = siteConfig;
+const base = import.meta.env.BASE_URL;
 ---
 
 <footer class="py-16 relative overflow-hidden">
@@ -15,13 +14,8 @@ const { contact } = siteConfig;
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
       <!-- Brand -->
       <div>
-        <a href="#hero" class="inline-flex items-center gap-3 mb-5 group">
-          <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center transition-transform duration-300 group-hover:scale-105 glow-primary">
-            <PlayIcon size={18} stroke class="text-white" />
-          </div>
-          <span class="text-xl font-display font-semibold tracking-tight">
-            <span class="text-white">Motion</span><span class="gradient-text-static">Glyph</span>
-          </span>
+        <a href="#hero" class="inline-flex items-center mb-5 group">
+          <img src={`${base}logo.png`} alt="Motion Glyph" class="h-14 w-auto transition-transform duration-300 group-hover:scale-105" />
         </a>
         <p class="text-gray-400 leading-relaxed">{siteConfig.tagline}</p>
       </div>
