@@ -1,9 +1,9 @@
 ---
 import { siteConfig } from "../../data/site-config";
 import ArrowIcon from "../ui/icons/ArrowIcon.astro";
-import PlayIcon from "../ui/icons/PlayIcon.astro";
 
 const { navLinks } = siteConfig;
+const base = import.meta.env.BASE_URL;
 ---
 
 <nav id="nav" class="fixed top-0 left-0 right-0 h-18 z-50 transition-all duration-500">
@@ -11,13 +11,8 @@ const { navLinks } = siteConfig;
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-full relative">
     <!-- Logo -->
-    <a href="#hero" class="flex items-center gap-3 group">
-      <div class="w-10 h-10 rounded-xl gradient-bg flex items-center justify-center transition-transform duration-300 group-hover:scale-105 glow-primary">
-        <PlayIcon size={18} stroke class="text-white" />
-      </div>
-      <span class="text-xl font-display font-semibold tracking-tight">
-        <span class="text-white">Motion</span><span class="gradient-text-static">Glyph</span>
-      </span>
+    <a href="#hero" class="flex items-center group">
+      <img src={`${base}logo.png`} alt="Motion Glyph" class="h-20 w-auto transition-transform duration-300 group-hover:scale-105" />
     </a>
 
     <!-- Desktop Navigation -->
